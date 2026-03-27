@@ -11,13 +11,12 @@ if (!isset($_SESSION['id_usuario'])) {
 $id_sesion = $_SESSION['id_usuario'];
 $rol_sesion = $_SESSION['rol'];
 
-// 2. Lógica para Eliminar (Unificada y con Registro de Actividad)
+// 2. Lógica para Eliminar
 if (isset($_GET['eliminar'])) {
-    // Verificamos permisos: Solo Admin o Usuario pueden eliminar
     if ($rol_sesion === 'Administrador' || $rol_sesion === 'Usuario') {
         $id_p = intval($_GET['eliminar']);
 
-        // Opcional: Obtener el nombre del producto antes de borrarlo para un log más claro
+        // Obtener nombre para el log
         $stmt_info = $conn->prepare("SELECT nombre FROM productos WHERE id_producto = ?");
         $stmt_info->bind_param("i", $id_p);
         $stmt_info->execute();
@@ -25,21 +24,27 @@ if (isset($_GET['eliminar'])) {
         $prod_info = $res_info->fetch_assoc();
         $nombre_producto = $prod_info ? $prod_info['nombre'] : "ID: $id_p";
 
-        // Ejecutar eliminación
-        $stmt_del = $conn->prepare("DELETE FROM productos WHERE id_producto = ?");
-        $stmt_del->bind_param("i", $id_p);
-
-        if ($stmt_del->execute()) {
-            // --- ESTO ES LO QUE ALIMENTA EL RESUMEN DE ACTIVIDAD ---
-            $accion_log = "Eliminó el producto: " . $nombre_producto;
-            registrarActividad($conn, $id_sesion, $accion_log);
-            // -------------------------------------------------------
-
-            header("Location: gestion.php?msj=Producto eliminado correctamente");
-            exit();
+        try {
+            $stmt_del = $conn->prepare("DELETE FROM productos WHERE id_producto = ?");
+            $stmt_del->bind_param("i", $id_p);
+            
+            if ($stmt_del->execute()) {
+                registrarActividad($conn, $id_sesion, "Eliminó el producto: " . $nombre_producto);
+                header("Location: gestion.php?status=success&msj=Producto eliminado correctamente");
+                exit();
+            }
+        } catch (mysqli_sql_exception $e) {
+            // Error 1451: Restricción de llave foránea (tiene ventas)
+            if ($e->getCode() == 1451) {
+                header("Location: gestion.php?status=error_fk");
+                exit();
+            } else {
+                header("Location: gestion.php?status=error_gen");
+                exit();
+            }
         }
     } else {
-        header("Location: gestion.php?error=No tienes permisos para realizar esta acción");
+        header("Location: gestion.php?status=error_permiso");
         exit();
     }
 }
@@ -131,6 +136,39 @@ $resultado = $conn->query($sql);
             </table>
         </div>
     </div>
-    
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
+
+        if (status === 'error_fk') {
+            Swal.fire({
+                icon: 'error',
+                title: 'No se puede eliminar',
+                text: 'Este producto ya tiene ventas registradas en el sistema y no puede ser borrado para mantener la integridad contable.',
+                confirmButtonColor: '#3085d6',
+                background: '#1e293b',
+                color: '#fff'
+            });
+        } else if (status === 'success') {
+            Swal.fire({
+                icon: 'success',
+                title: '¡Logrado!',
+                text: 'El producto ha sido removido del inventario.',
+                timer: 2000,
+                showConfirmButton: false,
+                background: '#1e293b',
+                color: '#fff'
+            });
+        } else if (status === 'error_permiso') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Acceso Denegado',
+                text: 'No tienes los permisos necesarios para eliminar productos.',
+                background: '#1e293b',
+                color: '#fff'
+            });
+        }
+    </script>
 </body>
 </html>

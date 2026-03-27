@@ -25,13 +25,10 @@ $conn->set_charset("utf8");
  * Se alimenta automáticamente cada vez que se llama en nuevo.php, editar.php, etc.
  */
 function registrarActividad($conexion, $id_usuario, $mensaje_accion) {
-    // Asegúrate de que la tabla en tu DB se llame 'actividad_logs'
     $stmt = $conexion->prepare("INSERT INTO actividad_logs (id_usuario, accion) VALUES (?, ?)");
     $stmt->bind_param("is", $id_usuario, $mensaje_accion);
     $stmt->execute();
     $stmt->close();
 }
 
-// Opcional: Activar el reporte de errores de MySQLi para desarrollo
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 ?>
