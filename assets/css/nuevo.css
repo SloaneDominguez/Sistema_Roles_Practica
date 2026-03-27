@@ -1,0 +1,147 @@
+:root {
+    --bg-color: #06110b;
+    --bg-gradient-1: #0a1f14;
+    --bg-gradient-2: #07140d;
+    --card-bg: rgba(15, 35, 24, 0.92);
+    --card-border: rgba(34, 197, 94, 0.20);
+    --text-color: #f0fdf4;
+    --text-muted: #bbf7d0;
+    --accent-green: #22c55e;
+    --accent-neon: #00ff88;
+    --accent-cyan: #22d3ee;
+    --input-bg: rgba(31, 55, 42, 0.95);
+    --input-border: rgba(74, 222, 128, 0.15);
+    --error-red: #ef4444;
+}
+
+body {
+    background:
+        radial-gradient(circle at top left, rgba(34, 197, 94, 0.12), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(0, 255, 136, 0.08), transparent 35%),
+        linear-gradient(135deg, var(--bg-color), var(--bg-gradient-1), var(--bg-gradient-2));
+    color: var(--text-color);
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden; /* Mantiene la vista limpia sin scroll */
+}
+
+/* CONTENEDOR TIPO TARJETA COMPACTA */
+.form-container {
+    background: var(--card-bg);
+    backdrop-filter: blur(14px);
+    padding: 1.8rem 2.5rem;
+    border-radius: 1.2rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 420px;
+    border: 1px solid var(--card-border);
+    animation: slideUp 0.6s ease;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    text-align: center;
+    color: var(--accent-neon);
+    margin-bottom: 1.2rem;
+    font-size: 1.6rem;
+    text-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+}
+
+.form-group {
+    margin-bottom: 0.8rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 0.8rem;
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    color: white;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--accent-neon);
+    box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1);
+}
+
+/* MENSAJE DE ERROR */
+.error-msg {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid var(--error-red);
+    color: #fee2e2;
+    padding: 0.7rem;
+    border-radius: 0.6rem;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+/* BOTÓN GUARDAR (ESTILO VERDE NEÓN) */
+.btn-save {
+    width: 100%;
+    padding: 0.9rem;
+    border: none;
+    border-radius: 1rem;
+    background: linear-gradient(135deg, var(--accent-green), var(--accent-neon));
+    color: #052e16;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 1rem;
+}
+
+.btn-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.4);
+    filter: brightness(1.1);
+}
+
+/* BOTÓN VOLVER (ESTILO CYAN OUTLINE - MISMO TAMAÑO) */
+.back-link {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0.85rem; /* Ajustado para igualar al de Guardar */
+    margin-top: 0.7rem;
+    background: rgba(34, 211, 238, 0.05);
+    color: var(--accent-cyan) !important;
+    border: 1px solid rgba(34, 211, 238, 0.4);
+    border-radius: 1rem;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.back-link:hover {
+    background: rgba(34, 211, 238, 0.12);
+    border-color: var(--accent-cyan);
+    transform: translateY(-1px);
+    box-shadow: 0 0 15px rgba(34, 211, 238, 0.2);
+}
+

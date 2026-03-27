@@ -1,0 +1,249 @@
+:root {
+    /* Paleta de colores consistente con el Login */
+    --bg-color: #06110b;
+    --bg-gradient-1: #0a1f14;
+    --bg-gradient-2: #07140d;
+    --sidebar-bg: rgba(10, 31, 20, 0.95);
+    --card-bg: rgba(15, 35, 24, 0.92);
+    --card-border: rgba(34, 197, 94, 0.20);
+    --text-color: #f0fdf4;
+    --text-muted: #bbf7d0;
+    --accent-green: #22c55e;
+    --accent-neon: #00ff88;
+    --accent-purple: #8b5cf6;
+    --accent-cyan: #06b6d4;
+    --danger: #ef4444;
+}
+
+/* Base y Scrollbar */
+body {
+    background: 
+        radial-gradient(circle at top left, rgba(34, 197, 94, 0.08), transparent 40%),
+        linear-gradient(135deg, var(--bg-color), var(--bg-gradient-1), var(--bg-gradient-2));
+    color: var(--text-color);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--card-border);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-green);
+}
+
+/* Sidebar Estilo Profesional */
+.sidebar {
+    width: 260px;
+    background: var(--sidebar-bg);
+    backdrop-filter: blur(10px);
+    border-right: 1px solid var(--card-border);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    z-index: 100;
+}
+
+.sidebar-header {
+    padding: 2.5rem 1.5rem;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+}
+
+.sidebar-menu {
+    flex: 1;
+    padding: 0 1rem;
+}
+
+.menu-item {
+    display: block;
+    padding: 0.85rem 1.2rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-radius: 0.75rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.menu-item:hover {
+    background: rgba(34, 197, 94, 0.1);
+    color: var(--accent-neon);
+    transform: translateX(5px);
+}
+
+.menu-item.active {
+    background: linear-gradient(90deg, rgba(34, 197, 94, 0.2), transparent);
+    color: var(--accent-neon);
+    border-left: 3px solid var(--accent-neon);
+}
+
+/* Contenido Principal */
+.main-content {
+    flex: 1;
+    margin-left: 260px;
+    padding: 2.5rem;
+    max-width: 1200px;
+}
+
+header h1 {
+    font-size: 2rem;
+    color: var(--text-color);
+    text-shadow: 0 0 15px rgba(255,255,255,0.1);
+}
+
+.role-badge {
+    background: rgba(0, 255, 136, 0.1);
+    color: var(--accent-neon);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+/* Tarjetas de Estadísticas (Stats) */
+.header-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin: 2.5rem 0;
+}
+
+.stat-card {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 1.2rem;
+    border: 1px solid var(--card-border);
+    border-left: 5px solid var(--accent-green); /* Color por defecto */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-card h3 {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat-card p {
+    margin: 0.5rem 0 0;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-color);
+}
+
+/* Lista de Actividad */
+.activity-list {
+    background: rgba(0,0,0,0.2);
+    border-radius: 1rem;
+    padding: 0.5rem;
+}
+
+.activity-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    animation: fadeIn 0.5s ease backwards;
+}
+
+.activity-item:last-child { border: none; }
+
+.user-tag {
+    color: var(--accent-cyan);
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.time-tag {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    background: rgba(255,255,255,0.05);
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.logout-btn:hover {
+    filter: brightness(1.2);
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+    transform: scale(1.02);
+    transition: all 0.3s ease;
+}
+
+/* Responsividad */
+@media (max-width: 992px) {
+    .sidebar { width: 80px; }
+    .sidebar-header, .menu-item span, .sidebar-header { display: none; }
+    .main-content { margin-left: 80px; }
+    .sidebar-header { padding: 1rem; font-size: 0.8rem; }
+}
+
+@media (max-width: 768px) {
+    .header-stats { grid-template-columns: 1fr; }
+    .main-content { padding: 1.5rem; }
+}
+
+
+/* --- AJUSTE BOTÓN CERRAR SESIÓN --- */
+.sidebar div[style*="position: absolute"] {
+    position: absolute;
+    bottom: 20px !important; /* Separación del borde inferior */
+    width: 100%;
+    padding: 0 1.5rem !important; /* Espacio a los lados para que no toque bordes */
+    box-sizing: border-box; /* Asegura que el padding no rompa el ancho */
+}
+
+.logout-btn {
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+.logout-btn:hover {
+    background: #dc2626 !important; /* Un rojo un poco más oscuro al pasar el mouse */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(239, 68, 68, 0.4);
+}
+
+/* --- AJUSTE CUADRO RESUMEN DE ACTIVIDAD --- */
+.info-section {
+    display: flex;
+    justify-content: flex-start; /* Alinea el cuadro a la izquierda */
+    margin-top: 2rem;
+}
+
+.info-section .stat-card {
+    width: 100% !important;
+    max-width: 900px; /* EVITA QUE SEA MUY ANCHO - Ajusta este valor a tu gusto */
+    border-top: 4px solid var(--accent-purple) !important;
+    background: var(--card-bg);
+}
+
+/* Mejora sutil en la lista de actividad para que no se vea tan estirada */
+.activity-item {
+    padding: 1.2rem 1rem;
+}

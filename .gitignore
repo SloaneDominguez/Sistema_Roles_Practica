@@ -1,0 +1,9 @@
+# Configuración de base de datos
+.env
+
+# Dependencias
+/vendor/
+
+# Archivos temporales y del sistema
+.DS_Store
+Thumbs.db

@@ -1,0 +1,200 @@
+:root {
+    --bg-color: #06110b;
+    --bg-gradient-1: #0a1f14;
+    --bg-gradient-2: #07140d;
+    --card-bg: rgba(15, 35, 24, 0.92);
+    --card-border: rgba(34, 197, 94, 0.20);
+    --text-color: #f0fdf4;
+    --text-muted: #bbf7d0;
+    --accent-green: #22c55e;
+    --accent-neon: #00ff88;
+    --accent-cyan: #06b6d4;
+    --input-bg: rgba(31, 55, 42, 0.95);
+}
+
+body {
+    background: 
+        radial-gradient(circle at top left, rgba(34, 197, 94, 0.12), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(0, 255, 136, 0.08), transparent 35%),
+        linear-gradient(135deg, var(--bg-color), var(--bg-gradient-1), var(--bg-gradient-2));
+    color: var(--text-color);
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+.main-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    animation: fadeIn 0.8s ease;
+}
+
+/* --- ENCABEZADO CON BOTÓN A LA DERECHA --- */
+.main-header {
+    display: flex;
+    justify-content: space-between; /* ESTO MUEVE EL BOTÓN AL OTRO LADO */
+    align-items: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--card-border);
+}
+
+.header-info h2 {
+    margin: 0;
+    color: var(--accent-neon);
+    font-size: 1.8rem;
+    text-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+}
+
+.subtitle {
+    margin: 5px 0 0 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* BOTÓN VOLVER ESTILIZADO */
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.7rem 1.4rem;
+    background: rgba(6, 182, 212, 0.08);
+    color: #22d3ee !important;
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(4px);
+}
+
+.btn-back:hover {
+    background: rgba(6, 182, 212, 0.15);
+    border-color: #22d3ee;
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.25);
+    transform: translateY(-2px);
+}
+
+/* --- TABLA Y CONTENIDO --- */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border-radius: 1.2rem;
+    border: 1px solid var(--card-border);
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.admin-table th {
+    padding: 1.2rem;
+    color: var(--accent-neon);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+    background: rgba(34, 197, 94, 0.05);
+    border-bottom: 2px solid var(--card-border);
+    text-align: left;
+}
+
+.admin-table td {
+    padding: 1.1rem 1.2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    font-size: 0.95rem;
+}
+
+/* INPUTS Y BOTÓN VENDER */
+input[type="number"] {
+    background: var(--input-bg);
+    border: 1px solid var(--card-border);
+    color: white;
+    padding: 0.6rem;
+    border-radius: 8px;
+    width: 70px;
+    text-align: center;
+    outline: none;
+    transition: 0.3s;
+}
+
+input[type="number"]:focus {
+    border-color: var(--accent-neon);
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+}
+
+.btn {
+    background: linear-gradient(135deg, var(--accent-green), var(--accent-neon));
+    color: #052e16;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
+}
+
+/* ALERTAS */
+.alert-box {
+    background: rgba(34, 197, 94, 0.1);
+    border-left: 4px solid var(--accent-neon);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    .main-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+    .btn-back { width: 100%; justify-content: center; }
+}
+
+/* Limitar el ancho del contenedor principal */
+.main-container {
+    max-width: 850px; /* Ajustado de 1100px a 850px para reducir el ancho total */
+    margin: 0 auto;
+    animation: fadeIn 0.8s ease;
+    padding: 20px;
+}
+
+/* Optimización de la tabla */
+.admin-table {
+    width: 70%; /* Sigue ocupando el 100% de su contenedor (los 850px) */
+    border-collapse: collapse;
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border-radius: 1.2rem;
+    border: 1px solid var(--card-border);
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    margin: 0 auto; /* Asegura que esté centrada */
+}
+
+/* Hacer las celdas más compactas */
+.admin-table td, .admin-table th {
+    padding: 0.8rem 1.2rem; /* Reducido ligeramente el padding vertical */
+}
+
+/* Ajustar el ancho específico de la columna de acción para que no se estire */
+.admin-table th:last-child, 
+.admin-table td:last-child {
+    width: 100px; /* Fija un ancho para la zona de botones y cantidad */
+    text-align: center;
+}

@@ -1,0 +1,302 @@
+:root {
+    --bg-color: #06110b;
+    --bg-gradient-1: #0a1f14;
+    --bg-gradient-2: #07140d;
+    --card-bg: rgba(15, 35, 24, 0.92);
+    --card-border: rgba(34, 197, 94, 0.20);
+    --text-color: #f0fdf4;
+    --text-muted: #bbf7d0;
+    --accent-green: #22c55e;
+    --accent-green-light: #4ade80;
+    --accent-neon: #00ff88;
+    --input-bg: rgba(31, 55, 42, 0.95);
+    --input-border: rgba(74, 222, 128, 0.15);
+    --danger-bg: rgba(127, 29, 29, 0.20);
+    --danger-border: #ef4444;
+    --danger-text: #fecaca;
+}
+
+body {
+    background:
+        radial-gradient(circle at top left, rgba(34, 197, 94, 0.12), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(0, 255, 136, 0.08), transparent 35%),
+        linear-gradient(135deg, var(--bg-color), var(--bg-gradient-1), var(--bg-gradient-2));
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    animation: bodyFade 0.9s ease;
+}
+
+@keyframes bodyFade {
+    from { opacity: 0; transform: scale(1.02); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.auth-container {
+    background: var(--card-bg);
+    backdrop-filter: blur(14px);
+    padding: 2.5rem;
+    border-radius: 1.2rem;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45), 0 0 20px rgba(34, 197, 94, 0.10);
+    width: 100%;
+    max-width: 420px;
+    border: 1px solid var(--card-border);
+    position: relative;
+    animation: cardEnter 0.8s ease;
+}
+
+@keyframes cardEnter {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    text-align: center;
+    color: var(--accent-neon);
+    margin-bottom: 1.6rem;
+    font-size: 1.8rem;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.25);
+}
+
+.form-group { margin-bottom: 1rem; animation: fadeUp 0.7s ease; }
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.92rem;
+    color: var(--text-muted);
+}
+
+input {
+    width: 100%;
+    padding: 0.85rem 0.95rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    color: white;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: rgba(0, 255, 136, 0.35);
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.12);
+}
+
+.btn {
+    width: 100%;
+    padding: 0.9rem;
+    border: none;
+    border-radius: 0.85rem;
+    background: linear-gradient(135deg, var(--accent-green), var(--accent-neon));
+    color: #052e16;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.35s ease;
+    margin-top: 1rem;
+}
+
+.btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(34, 197, 94, 0.2); }
+
+.google-auth-wrapper { margin-top: 1.5rem; display: flex; justify-content: center; }
+
+.toggle-link { text-align: center; margin-top: 1.5rem; font-size: 0.88rem; color: var(--text-muted); }
+.toggle-link a { color: var(--accent-neon); text-decoration: none; font-weight: 600; }
+
+/* ALERTAS */
+/* 1. BASE: Estilo general para todas las alertas */
+.alert-box {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: alertFade 0.5s ease;
+}
+
+/* 2. ICONO: El círculo pequeño al lado del texto */
+.alert-icon {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 12px;
+    font-size: 0.75rem;
+    color: white;
+    font-weight: bold;
+}
+
+/* 3. VARIANTE DE ERROR (Rojo) */
+.alert-error {
+    background: var(--danger-bg, rgba(239, 68, 68, 0.1)); 
+    border-left: 5px solid #ef4444;
+    color: #ff8888;
+}
+.alert-error .alert-icon {
+    background: #ef4444;
+}
+.alert-error .alert-icon::before {
+    content: '✕'; /* Icono de X para error */
+}
+
+/* 4. VARIANTE DE ÉXITO (Verde Cyber) */
+.alert-success {
+    background: rgba(0, 255, 127, 0.1);
+    border-left: 5px solid #00ff7f;
+    color: #00ff7f;
+}
+.alert-success .alert-icon {
+    background: #00ff7f;
+    color: #00331a; /* Texto oscuro para que resalte el check */
+}
+
+
+@keyframes alertFade {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Nueva clase para éxito */
+.alert-success-custom {
+    background: rgba(34, 197, 94, 0.15);
+    border-color: rgba(34, 197, 94, 0.3);
+    border-left-color: var(--accent-neon);
+    color: #dcfce7;
+}
+
+.alert-success-custom::before {
+    content: '✓';
+    background: var(--accent-green);
+}
+
+@keyframes alertFade {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Contenedor para centrar el botón */
+.google-auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;
+    width: 100%;
+}
+
+/* Estilo personalizado para el botón de Google */
+.g_id_signin {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* Efecto de resplandor sutil para que combine con tu diseño */
+    filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.2));
+    transition: all 0.3s ease;
+}
+
+.g_id_signin:hover {
+    filter: drop-shadow(0 0 12px rgba(0, 255, 136, 0.4));
+    transform: translateY(-1px);
+}
+
+/* Forzar que el iframe de Google ocupe el ancho deseado si es necesario */
+#g_id_onload + div, 
+.S67S5c { 
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+}
+
+body {
+    /* ... tus estilos actuales ... */
+    overflow-y: auto; /* Cambia hidden por auto para permitir scroll si es necesario */
+    padding: 20px 0;  /* Espacio extra arriba y abajo para móviles */
+}
+
+.auth-container {
+    /* ... tus estilos actuales ... */
+    max-height: 90vh; /* Evita que sea más alto que la pantalla */
+    overflow-y: auto; /* Agrega scroll interno si el formulario es muy largo */
+    padding: 2rem;    /* Reducimos un poco el padding para ganar espacio */
+}
+
+/* Personalización del scrollbar para que combine con tu diseño dark/neon */
+.auth-container::-webkit-scrollbar {
+    width: 6px;
+}
+.auth-container::-webkit-scrollbar-thumb {
+    background: var(--accent-green);
+    border-radius: 10px;
+}
+
+.form-group {
+    margin-bottom: 0.8rem; /* Reducimos de 1rem a 0.8rem */
+}
+
+h2 {
+    margin-bottom: 1.2rem; /* Reducimos el margen del título */
+    font-size: 1.6rem;
+}
+
+input {
+    padding: 0.75rem 0.95rem; /* Un poco más delgados */
+}
+
+.google-auth-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 1rem;
+    overflow: hidden; /* Evita que el iframe de Google rompa el layout */
+}
+
+/* Ajuste para que el botón de Google sea responsivo */
+.g_id_signin {
+    max-width: 100%;
+}
+
+/* Estilo base para todas las alertas */
+.alert-box {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border-left: 5px solid;
+}
+
+/* Color para ERROR (Rojo/Naranja) */
+.alert-error {
+    background-color: rgba(255, 0, 0, 0.1);
+    border-color: #ff4444;
+    color: #ff8888;
+}
+
+/* Color para ÉXITO (Verde Cyber) */
+.alert-success {
+    background-color: rgba(0, 255, 127, 0.1);
+    border-color: #00ff7f; /* Tu verde neón */
+    color: #00ff7f;
+}
+
+.alert-icon {
+    margin-right: 10px;
+    font-weight: bold;
+}

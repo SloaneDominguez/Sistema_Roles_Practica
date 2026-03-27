@@ -1,0 +1,175 @@
+:root {
+    --bg-color: #06110b;
+    --bg-gradient-1: #0a1f14;
+    --bg-gradient-2: #07140d;
+    --card-bg: rgba(15, 35, 24, 0.92);
+    --card-border: rgba(34, 197, 94, 0.20);
+    --text-color: #f0fdf4;
+    --text-muted: #bbf7d0;
+    --accent-green: #22c55e;
+    --accent-neon: #00ff88;
+    --accent-cyan: #22d3ee;
+    --input-bg: rgba(31, 55, 42, 0.95);
+    --input-border: rgba(74, 222, 128, 0.15);
+    --disabled-bg: rgba(51, 65, 85, 0.3);
+}
+
+body {
+    background:
+        radial-gradient(circle at top left, rgba(34, 197, 94, 0.12), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(0, 255, 136, 0.08), transparent 35%),
+        linear-gradient(135deg, var(--bg-color), var(--bg-gradient-1), var(--bg-gradient-2));
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden; /* Evita el scroll si el contenido ajusta bien */
+}
+
+/* CONTENEDOR COMPACTO */
+.auth-container {
+    background: var(--card-bg);
+    backdrop-filter: blur(14px);
+    padding: 1.8rem 2.5rem; /* Reducido para que sea menos alto */
+    border-radius: 1.2rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 420px; /* Un poco más estrecho para verse más estético */
+    border: 1px solid var(--card-border);
+    animation: cardFadeIn 0.8s ease;
+}
+
+@keyframes cardFadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    text-align: center;
+    color: var(--accent-neon);
+    margin-bottom: 1.2rem; /* Menos espacio abajo del título */
+    font-size: 1.6rem; /* Título un poco más pequeño */
+    letter-spacing: -0.5px;
+    text-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+}
+
+.form-group {
+    margin-bottom: 0.8rem; /* Inputs más pegados entre sí */
+}
+
+label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-size: 0.85rem; /* Fuente más pequeña para ahorrar espacio */
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+input {
+    width: 100%;
+    padding: 0.7rem 1rem; /* Padding reducido */
+    border-radius: 0.7rem;
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    color: white;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--accent-neon);
+    box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1);
+}
+
+input:disabled {
+    background: var(--disabled-bg);
+    border-color: rgba(148, 163, 184, 0.1);
+    color: #94a3b8;
+    cursor: not-allowed;
+}
+
+small {
+    display: block;
+    margin-top: 0.3rem;
+    font-size: 0.75rem;
+    color: #94a3b8;
+}
+
+/* ALERTAS COMPACTAS */
+.alert-box {
+    padding: 0.6rem 1rem;
+    border-radius: 0.6rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+}
+
+.alert-success {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    color: #dcfce7;
+}
+
+/* CONTENEDOR DE BOTONES MÁS PEGADOS */
+.actions-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem; /* Botones más juntos */
+    margin-top: 1.2rem;
+    width: 100%;
+}
+
+.btn-save {
+    width: 100%;
+    padding: 0.85rem;
+    border: none;
+    border-radius: 0.8rem;
+    background: linear-gradient(135deg, #22c55e, #00ff88);
+    color: #052e16;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
+}
+
+.btn-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(34, 197, 94, 0.4);
+}
+
+.btn-back-link {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: rgba(34, 211, 238, 0.05);
+    color: #22d3ee !important;
+    border: 1px solid rgba(34, 211, 238, 0.2);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.btn-back-link:hover {
+    background: rgba(34, 211, 238, 0.12);
+    border-color: #22d3ee;
+    transform: translateY(-1px);
+}
+
+.btn-back-link::before {
+    content: '🏠';
+    font-size: 1rem;
+}
